@@ -1,0 +1,49 @@
+
+```{r}
+library(ggplot2)
+```
+
+```{r setup, include=FALSE}
+output1<-read.delim("MichalK_output.txt", sep=";")
+data1 <- data.frame(output1$X_N, output1$Y_N, output1$Z_N)
+data2 <- data.frame(output1$X_D, output1$Y_D, output1$Z_D)
+```
+
+```{r}
+#KMEANS DLA k=2
+group2N<-kmeans(data1,2)
+kmeans2N<-ggplot(output1, aes(X_C, Y_C, color = factor(group2N$cluster)))+
+  geom_point()+coord_fixed()
+#KMEANS DLA k=3
+group3N<-kmeans(data1,3)
+kmeans3N<-ggplot(output1, aes(X_C, Y_C, color = factor(group3N$cluster)))+
+  geom_point()+coord_fixed()
+#KMEANS DLA k=4
+group4N<-kmeans(data1,4)
+kmeans4N<-ggplot(output1, aes(X_C, Y_C, color = factor(group4N$cluster)))+
+  geom_point()+coord_fixed()
+#KMEANS DLA k=5
+group5N<-kmeans(data1,5)
+kmeans5N<-ggplot(output1, aes(X_C, Y_C, color = factor(group5N$cluster)))+
+  geom_point()+coord_fixed()
+```
+
+```{r}
+#KMEANS DLA k=2
+group2D<-kmeans(data2,2)
+kmeans2D<-ggplot(output1, aes(X_C, Y_C, color = factor(group2D$cluster)))+
+  geom_point()
+#KMEANS DLA k=3
+group3D<-kmeans(data2,3)
+kmeans3D<-ggplot(output1, aes(X_C, Y_C, color = factor(group3D$cluster)))+
+  geom_point()
+#KMEANS DLA k=4
+group4D<-kmeans(data2,4)
+kmeans4D<-ggplot(output1, aes(X_C, Y_C, color = factor(group4D$cluster)))+
+  geom_point()
+#KMEANS DLA k=5
+group5D<-kmeans(data2,5)
+kmeans5D<-ggplot(output1, aes(X_C, Y_C, color = factor(group5D$cluster)))+
+  geom_point()
+```
+

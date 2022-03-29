@@ -1,0 +1,33 @@
+
+```{r}
+library("dismo")
+library("gstat")
+library("sf")
+library("tmap")
+```
+
+```{r}
+df=read.delim("MichalK_output.txt", sep=";")
+newdf<-df[seq(1, nrow(df), 1000),]
+newdf<-newdf[c('X_C','Y_C','Z_C')]
+```
+
+```{r}
+voronoi_interp = voronoi(newdf)
+voronoi_interp = st_as_sf(voronoi_interp)
+voronoi_interp$X1 = newdf$X_C
+voronoi_interp$Y1 = newdf$Y_C
+voronoi_interp$Z1 = newdf$Z_C
+```
+
+```{r}
+voronoi=tm_shape(voronoi_interp) +
+        tm_polygons(col = "Z1", n = 10, palette = "-Spectral",
+                    title = "Diagramy Woronoja:\nwysokość n.p.m.") +
+        tm_layout(legend.outside = TRUE,legend.outside.position="bottom",legend.outside.size=0.8)
+png("voronoi_diagram_fiji.png",height = 200)
+
+
+```
+```
+
